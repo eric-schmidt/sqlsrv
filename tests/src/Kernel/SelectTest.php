@@ -39,7 +39,7 @@ class SelectTest extends DatabaseTestBase {
    * @dataProvider dataProviderForTestConcatWs
    */
   public function testConcatWs($separator) {
-    $query = $this->connection->select('test');
+    $query = $this->connection->select('test_people');
     $name_field = $query->addField('test', 'name');
     $job_field = $query->addField('test', 'job');
     $concat_field = $query->addExpression('CONCAT_WS(\'' . $separator . '\', name, job)');
