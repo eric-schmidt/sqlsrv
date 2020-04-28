@@ -45,7 +45,7 @@ class SelectTest extends DatabaseTestBase {
     $concat_field = $query->addExpression('CONCAT_WS(\'' . $separator . '\', name, job)');
     $results = $query->execute();
     while ($row = $results->fetchAssoc()) {
-      $this->assertEqual($row[$concat_field], $row[$name_field] . '-'. $row[$job_field]);
+      $this->assertEqual($row[$concat_field], $row[$name_field] . $separator . $row[$job_field]);
     }
   }
 
