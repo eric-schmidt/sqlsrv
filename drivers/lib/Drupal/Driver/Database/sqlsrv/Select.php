@@ -64,7 +64,7 @@ class Select extends QuerySelect {
       $arguments = explode(', ', $argument_list);
       $closing_quote_pos = stripos($argument_list, '\'', 1);
       $separator = substr($argument_list, 1, $closing_quote_pos - 1);
-      $strings_list = substr($arguments, stripos($argument_list, '\'', 1) + 3);
+      $strings_list = substr($argument_list, $closing_quote_pos + 3);
       $arguments = explode(', ', $argument_list);
       $replace = "STUFF(";
       $coalesce = [];
