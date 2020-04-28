@@ -58,15 +58,18 @@ class Select extends QuerySelect {
   public function addExpression($expression, $alias = NULL, $arguments = [], $exclude = FALSE, $expand = TRUE) {
     if (($pos1 = stripos($expression, 'CONCAT_WS(')) !== FALSE) {
       $pos2 = $this->findParenMatch($expression, $pos1 + 9);
-      // $arguments = explode by ',' everything between $pos1 and $pos2
-      // $separator = array_shift($arguments);
-      // $replace = "STUFF("
-      // foreach ($arguments as $argument) {
-      //   $replace .= "COALESCE($separator + $argument, '') + ";
-    COALESCE('; ' + b, '') +
-    COALESCE('; ' + c, '') +
-    COALESCE('; ' + d, ''),
-1, 2, '') AS bar
+      $argument_list = substr($expression, $pos1 + 10, $pos2 - 10 - $pos1);
+      $arguments = explode(', ' $argument_list);
+      $separator = array_shift($arguments);
+      $replace = "STUFF(";
+      $coalesce = [];
+      foreach ($arguments as $argument) {
+        $coalesce[] = "COALESCE($separator + $argument, '')";
+      }
+      $coalesce_string = implode(' + ', $coalesce);
+      $alias_string = is_null($alias) ? '' : " AS $alias";
+      $replace = 'STUFF(' . $coalesce_string . ', 1, ' . strlen($separator) . '\'\')' . $alias_string;
+      $expression = substr($expression, 0, $pos1) . $replace . substr($expression, $pos2 - strlen($expression));
     }
     $sub_expression = $expression;
     $replacement_expression = '';
