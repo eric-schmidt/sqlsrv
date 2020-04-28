@@ -33,4 +33,15 @@ class SelectTest extends DatabaseTestBase {
     $this->assertIdentical($namespace, get_class($nested_or_condition));
   }
 
+  public function testConcatWs() {
+    $query = $this->connection->select('test');
+    $name_field = $query->addField('test', 'name');
+    $job_field = $query->addField('test', 'job');
+    $concat_field = $query->addExpression('CONCAT_WS('-', name, job)');
+    $results = $query->execute();
+    while ($row = $results->fetchAssoc()) {
+      $this->assertEqual($row[$concat_field], $row[$name_field] . '-'. $row[$job_field]);
+    }
+  }
+
 }
