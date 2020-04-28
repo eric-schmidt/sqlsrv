@@ -70,7 +70,7 @@ class Select extends QuerySelect {
       $alias_string = is_null($alias) ? '' : " AS $alias";
       $sep_len = strlen($separator) - 2;
       $replace = 'STUFF(' . $coalesce_string . ', 1, ' . $sep_len . ', \'\')' . $alias_string;
-      $expression = substr($expression, 0, $pos1) . $replace . substr($expression, $pos2 - strlen($expression));
+      $expression = substr($expression, 0, $pos1) . $replace . substr($expression, $pos2 - strlen($expression) + 1);
     }
     $sub_expression = $expression;
     $replacement_expression = '';
