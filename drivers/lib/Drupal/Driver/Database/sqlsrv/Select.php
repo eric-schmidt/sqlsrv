@@ -56,6 +56,18 @@ class Select extends QuerySelect {
    *   The unique alias that was assigned for this expression.
    */
   public function addExpression($expression, $alias = NULL, $arguments = [], $exclude = FALSE, $expand = TRUE) {
+    if (($pos1 = stripos($expression, 'CONCAT_WS(')) !== FALSE) {
+      $pos2 = $this->findParenMatch($expression, $pos1 + 9);
+      // $arguments = explode by ',' everything between $pos1 and $pos2
+      // $separator = array_shift($arguments);
+      // $replace = "STUFF("
+      // foreach ($arguments as $argument) {
+      //   $replace .= "COALESCE($separator + $argument, '') + ";
+    COALESCE('; ' + b, '') +
+    COALESCE('; ' + c, '') +
+    COALESCE('; ' + d, ''),
+1, 2, '') AS bar
+    }
     $sub_expression = $expression;
     $replacement_expression = '';
     while (strlen($sub_expression) > 5 && (($pos1 = stripos($sub_expression, 'AVG(')) !== FALSE)) {
