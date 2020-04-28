@@ -65,7 +65,7 @@ class Select extends QuerySelect {
       $closing_quote_pos = stripos($argument_list, '\'', 1);
       $separator = substr($argument_list, 1, $closing_quote_pos - 1);
       $strings_list = substr($argument_list, $closing_quote_pos + 3);
-      $arguments = explode(', ', $argument_list);
+      $arguments = explode(', ', $strings_list);
       $replace = "STUFF(";
       $coalesce = [];
       foreach ($arguments as $argument) {
@@ -75,7 +75,7 @@ class Select extends QuerySelect {
       $alias_string = is_null($alias) ? '' : " AS $alias";
       $sep_len = strlen($separator);
       $replace = 'STUFF(' . $coalesce_string . ', 1, ' . $sep_len . ', \'\')' . $alias_string;
-      $expression = substr($expression, 0, $pos1) . $replace . substr($expression, $pos2 - strlen($expression) + 1);
+      $expression = substr($expression, 0, $pos1) . $replace . substr($expression, $pos2 + 1);
     }
     $sub_expression = $expression;
     $replacement_expression = '';
