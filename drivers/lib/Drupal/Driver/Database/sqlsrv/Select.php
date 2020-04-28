@@ -68,7 +68,8 @@ class Select extends QuerySelect {
       }
       $coalesce_string = implode(' + ', $coalesce);
       $alias_string = is_null($alias) ? '' : " AS $alias";
-      $replace = 'STUFF(' . $coalesce_string . ', 1, ' . strlen($separator) . '\'\')' . $alias_string;
+      $sep_len = strlen($separator) - 2;
+      $replace = 'STUFF(' . $coalesce_string . ', 1, ' . $sep_len . ', \'\')' . $alias_string;
       $expression = substr($expression, 0, $pos1) . $replace . substr($expression, $pos2 - strlen($expression));
     }
     $sub_expression = $expression;
