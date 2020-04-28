@@ -1404,7 +1404,12 @@ EOF
     ]);
 
     if (!empty($spec['length']) && $lengthable) {
-      return $sqlsrv_type_native . '(' . $spec['length'] . ')';
+      $multipler = 1;
+      if (self::DEFAULT_COLLATION_CI == 'LATIN1_GENERAL_100_CI_AS_SC_UTF8') {
+        $multiplier = 3;
+      }
+      $bytes = $multiplier * $spec['length'];
+      return $sqlsrv_type_native . '(' . $bytes . ')';
     }
     elseif (in_array($sqlsrv_type_native, ['numeric', 'decimal']) && isset($spec['precision']) && isset($spec['scale'])) {
       // Maximum precision for SQL Server 2008 or greater is 38.
