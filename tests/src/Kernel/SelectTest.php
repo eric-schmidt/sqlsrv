@@ -49,6 +49,9 @@ class SelectTest extends DatabaseTestBase {
     }
   }
 
+  /**
+   * Data Provider
+   */
   public function dataProviderForTestConcatWs() {
     return [
       'dash' => ['-'],
