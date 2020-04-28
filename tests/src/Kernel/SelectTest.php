@@ -40,8 +40,8 @@ class SelectTest extends DatabaseTestBase {
    */
   public function testConcatWs($separator) {
     $query = $this->connection->select('test_people');
-    $name_field = $query->addField('test', 'name');
-    $job_field = $query->addField('test', 'job');
+    $name_field = $query->addField('test_people', 'name');
+    $job_field = $query->addField('test_people', 'job');
     $concat_field = $query->addExpression('CONCAT_WS(\'' . $separator . '\', name, job)');
     $results = $query->execute();
     while ($row = $results->fetchAssoc()) {
