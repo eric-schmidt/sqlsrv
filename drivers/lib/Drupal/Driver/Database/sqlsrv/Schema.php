@@ -59,7 +59,7 @@ class Schema extends DatabaseSchema {
    *
    * @var string
    */
-  const DEFAULT_COLLATION_CI = 'Latin1_General_CI_AI';
+  const DEFAULT_COLLATION_CI = 'Latin1_General_CI_AI_UTF8';
 
   /**
    * Default case-sensitive collation.
@@ -69,7 +69,7 @@ class Schema extends DatabaseSchema {
    *
    * @var string
    */
-  const DEFAULT_COLLATION_CS = 'Latin1_General_CS_AI';
+  const DEFAULT_COLLATION_CS = 'Latin1_General_CS_AI_UTF8';
 
   // Name for the technical column used for computed key sor technical primary
   // key.
@@ -112,15 +112,15 @@ class Schema extends DatabaseSchema {
     // it much easier for modules (such as schema.module) to map
     // database types back into schema types.
     return [
-      'varchar:normal' => 'nvarchar',
-      'char:normal' => 'nchar',
-      'varchar_ascii:normal' => 'varchar(255)',
+      'varchar:normal' => 'varchar',
+      'char:normal' => 'char',
+      'varchar_ascii:normal' => 'varchar',
 
-      'text:tiny' => 'nvarchar(255)',
-      'text:small' => 'nvarchar(255)',
-      'text:medium' => 'nvarchar(max)',
-      'text:big' => 'nvarchar(max)',
-      'text:normal' => 'nvarchar(max)',
+      'text:tiny' => 'varchar(255)',
+      'text:small' => 'varchar(255)',
+      'text:medium' => 'varchar(max)',
+      'text:big' => 'varchar(max)',
+      'text:normal' => 'varchar(max)',
 
       'serial:tiny'     => 'smallint',
       'serial:small'    => 'smallint',
