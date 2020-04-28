@@ -59,12 +59,12 @@ class Select extends QuerySelect {
     if (($pos1 = stripos($expression, 'CONCAT_WS(')) !== FALSE) {
       $pos2 = $this->findParenMatch($expression, $pos1 + 9);
       $argument_list = substr($expression, $pos1 + 10, $pos2 - 10 - $pos1);
-      $arguments = explode(', ' $argument_list);
+      $arguments = explode(', ', $argument_list);
       $separator = array_shift($arguments);
       $replace = "STUFF(";
       $coalesce = [];
       foreach ($arguments as $argument) {
-        $coalesce[] = "COALESCE($separator + $argument, '')";
+        $coalesce[] = 'COALESCE(' . $separator . ' + ' . $argument . ', \'\')';
       }
       $coalesce_string = implode(' + ', $coalesce);
       $alias_string = is_null($alias) ? '' : " AS $alias";
