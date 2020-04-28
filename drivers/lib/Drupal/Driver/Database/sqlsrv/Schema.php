@@ -59,7 +59,7 @@ class Schema extends DatabaseSchema {
    *
    * @var string
    */
-  const DEFAULT_COLLATION_CI = 'Latin1_General_CI_AI_UTF8';
+  const DEFAULT_COLLATION_CI = 'LATIN1_GENERAL_100_CI_AS_SC_UTF8';
 
   /**
    * Default case-sensitive collation.
@@ -69,7 +69,7 @@ class Schema extends DatabaseSchema {
    *
    * @var string
    */
-  const DEFAULT_COLLATION_CS = 'Latin1_General_CS_AI_UTF8';
+  const DEFAULT_COLLATION_CS = 'LATIN1_GENERAL_100_CS_AS_SC_UTF8';
 
   // Name for the technical column used for computed key sor technical primary
   // key.
