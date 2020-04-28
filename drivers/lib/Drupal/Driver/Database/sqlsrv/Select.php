@@ -57,18 +57,23 @@ class Select extends QuerySelect {
    */
   public function addExpression($expression, $alias = NULL, $arguments = [], $exclude = FALSE, $expand = TRUE) {
     if (($pos1 = stripos($expression, 'CONCAT_WS(')) !== FALSE) {
+      // We assume the the separator does not contain any single-quotes
+      // and none of the arguments contain commas.
       $pos2 = $this->findParenMatch($expression, $pos1 + 9);
       $argument_list = substr($expression, $pos1 + 10, $pos2 - 10 - $pos1);
       $arguments = explode(', ', $argument_list);
-      $separator = array_shift($arguments);
+      $closing_quote_pos = stripos($argument_list, '\'', 1);
+      $separator = substr($argument_list, 1, $closing_quote_pos - 1);
+      $strings_list = substr($arguments, stripos($argument_list, '\'', 1) + 3);
+      $arguments = explode(', ', $argument_list);
       $replace = "STUFF(";
       $coalesce = [];
       foreach ($arguments as $argument) {
-        $coalesce[] = 'COALESCE(' . $separator . ' + ' . $argument . ', \'\')';
+        $coalesce[] = 'COALESCE(\'' . $separator . '\' + ' . $argument . ', \'\')';
       }
       $coalesce_string = implode(' + ', $coalesce);
       $alias_string = is_null($alias) ? '' : " AS $alias";
-      $sep_len = strlen($separator) - 2;
+      $sep_len = strlen($separator);
       $replace = 'STUFF(' . $coalesce_string . ', 1, ' . $sep_len . ', \'\')' . $alias_string;
       $expression = substr($expression, 0, $pos1) . $replace . substr($expression, $pos2 - strlen($expression) + 1);
     }
