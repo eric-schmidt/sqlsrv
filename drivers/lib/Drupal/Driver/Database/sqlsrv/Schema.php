@@ -1404,7 +1404,7 @@ EOF
     ]);
 
     if (!empty($spec['length']) && $lengthable) {
-      $multipler = 1;
+      $multiplier = 1;
       if (self::DEFAULT_COLLATION_CI == 'LATIN1_GENERAL_100_CI_AS_SC_UTF8') {
         $multiplier = 3;
       }
