@@ -98,12 +98,11 @@ class Condition extends QueryCondition {
       $replace = "STUFF(";
       $coalesce = [];
       foreach ($arguments as $argument) {
-        $coalesce[] = 'COALESCE(\'' . $separator . '\' + ' . $argument . ', \'\')';
+        $coalesce[] = "COALESCE('{$separator}' + {$argument}, '')";
       }
       $coalesce_string = implode(' + ', $coalesce);
-      $alias_string = is_null($alias) ? '' : " AS $alias";
       $sep_len = strlen($separator);
-      $replace = 'STUFF(' . $coalesce_string . ', 1, ' . $sep_len . ', \'\')' . $alias_string;
+      $replace = "STUFF({$coalesce_string}, 1, {$sep_len}, '')";
       $snippet = substr($snippet, 0, $pos1) . $replace . substr($snippet, $pos2 + 1);
       $operator = NULL;
     }
