@@ -65,7 +65,7 @@ class SelectTest extends DatabaseTestBase {
    *
    * @dataProvider dataProviderForTestConcatWs
    */
-  public function testWhereConcatWs($separator) {
+  public function testWhereConcatWs() {
     $query = $this->connection->select('test_people');
     $name_field = $query->addField('test_people', 'name');
     $job_field = $query->addField('test_people', 'job');
