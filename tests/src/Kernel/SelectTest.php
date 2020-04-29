@@ -60,4 +60,18 @@ class SelectTest extends DatabaseTestBase {
     ];
   }
 
+  /**
+   * Test the CONCAT_WS function in WHERE expression.
+   *
+   * @dataProvider dataProviderForTestConcatWs
+   */
+  public function testWhereConcatWs($separator) {
+    $query = $this->connection->select('test_people');
+    $name_field = $query->addField('test_people', 'name');
+    $job_field = $query->addField('test_people', 'job');
+    $query->addWhere("CONCAT_WS(' ', name, ' ', job) LIKE '%h%'");
+    $row= $query->execute()->fetchAssoc();
+    $this->assertEqual($row[$name_field], 'Meredith');
+  }
+  
 }
