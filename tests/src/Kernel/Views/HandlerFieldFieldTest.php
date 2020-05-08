@@ -175,8 +175,8 @@ class HandlerFieldFieldTest extends KernelTestBase {
     }
   }
 
-  public function testFieldRenderRepeat() {
-    $this->testFieldRender();
-  }
+  //public function testFieldRenderRepeat() {
+   // $this->testFieldRender();
+  //}
 
 }
