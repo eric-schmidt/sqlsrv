@@ -72,12 +72,12 @@ class HandlerFieldFieldTest extends KernelTestBase {
       $values = ['type' => 'page'];
       foreach ([0, 1, 2, 5] as $key) {
         $field_storage = $this->fieldStorages[$key];
-        $values[$field_storage->getName()][0]['value'] = $this->randomMachineName(8);
+        $values[$field_storage->getName()][0]['value'] = 'i' . $i . $key . $this->randomMachineName(8);
       }
       // Add a hidden value for the no-view field.
       $values[$this->fieldStorages[6]->getName()][0]['value'] = 'ssh secret squirrel';
       for ($j = 0; $j < 5; $j++) {
-        $values[$this->fieldStorages[3]->getName()][$j]['value'] = $this->randomMachineName(8);
+        $values[$this->fieldStorages[3]->getName()][$j]['value'] = 'j' . $j . $this->randomMachineName(8);
       }
       // Set this field to be empty.
       $values[$this->fieldStorages[4]->getName()] = [['value' => NULL]];
