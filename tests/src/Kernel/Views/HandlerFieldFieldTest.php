@@ -74,7 +74,7 @@ class HandlerFieldFieldTest extends KernelTestBase {
         $field_storage = $this->fieldStorages[$key];
         $name = 'i' . $i . $key . $this->randomMachineName(8);
         $values[$field_storage->getName()][0]['value'] = $name;
-        fwrite(STDOUT, $name);
+        fwrite(STDOUT, $name . "\n");
       }
       // Add a hidden value for the no-view field.
       $values[$this->fieldStorages[6]->getName()][0]['value'] = 'ssh secret squirrel';
