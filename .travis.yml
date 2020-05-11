@@ -93,7 +93,7 @@ install:
   - wget https://ftp.drupal.org/files/projects/memcache-8.x-2.x-dev.tar.gz
   - tar -xzf memcache-8.x-2.x-dev.tar.gz
   - rm memcache-8.x-2.x-dev.tar.gz
-  - cd $TRAVIS_BUILD_DIR/..
+  - cd $TRAVIS_BUILD_DIR/../drupal-project
   # reorganize sqlsrv directories
   - cp -r $TRAVIS_BUILD_DIR/drivers ./drivers
   - mv $TRAVIS_BUILD_DIR/dev/travis/TestSuites $TRAVIS_BUILD_DIR/tests/src/
