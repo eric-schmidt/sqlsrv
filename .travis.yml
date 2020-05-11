@@ -39,6 +39,7 @@ before_install:
   - yes "no --disable-memcached-sasl" | pecl install memcached
   - yes "autodetect" | pecl install yaml
   - phpenv config-add dev/travis/travis-7.x.ini
+  - php -i
 install:
   # Create a Drupal Site
   - cd ..
