@@ -66,6 +66,7 @@ install:
       git apply 3130655-10.patch
       git apply 3131379-2.patch
       # Testing-only patches
+      wget http://beakerboy.com/~kevin/enable_memcache_on_all_Entities.patch
       # Fix format of deprecation notices for phpcs 
       wget https://www.drupal.org/files/issues/2020-02-25/3108540-11.patch
       # Add a sqlsrv-specific datatype to test
@@ -75,6 +76,7 @@ install:
       git apply 2966272-16.patch
       git apply drupal-3111134-database_specific_types-3.patch
       git apply 3108540-11.patch
+      git apply enable_memcache_on_all_Entities.patch
       if [ "${DRUPAL_VERSION}" == "8.8.x" ]; then
         # Override core Condition...pushed to 8.9.x
         wget https://www.drupal.org/files/issues/2020-03-10/3113403-33.patch
@@ -84,11 +86,20 @@ install:
         git apply 3125391-9_0.patch
       fi
     fi
-  - cp -r $TRAVIS_BUILD_DIR/drivers ./drivers
   - mkdir ./modules/contrib
+  # Download and extract memcache module
+  - cd $TRAVIS_BUILD_DIR/../drupal-project/modules/contrib
+  - wget https://ftp.drupal.org/files/projects/memcache-8.x-2.x-dev.tar.gz
+  - tar -xzf memcache-8.x-2.x-dev.tar.gz
+  - rm memcache-8.x-2.x-dev.tar.gz
+  - cd $TRAVIS_BUILD_DIR/..
+  # reorganize sqlsrv directories
+  - cp -r $TRAVIS_BUILD_DIR/drivers ./drivers
   - mv $TRAVIS_BUILD_DIR/dev/travis/TestSuites $TRAVIS_BUILD_DIR/tests/src/
   - cp -rf $TRAVIS_BUILD_DIR ./modules/contrib/sqlsrv
+  # set up vendor binaries
   - PATH=$PATH:$TRAVIS_BUILD_DIR/../drupal-project/vendor/bin
+  # Set up testing environment
   - mkdir $TRAVIS_BUILD_DIR/../drupal-project/sites/simpletest
   - mkdir $TRAVIS_BUILD_DIR/../drupal-project/sites/simpletest/browser_output
   - cd $TRAVIS_BUILD_DIR/../drupal-project
