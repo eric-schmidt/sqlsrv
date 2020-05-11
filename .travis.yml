@@ -93,6 +93,10 @@ install:
   - wget https://ftp.drupal.org/files/projects/memcache-8.x-2.x-dev.tar.gz
   - tar -xzf memcache-8.x-2.x-dev.tar.gz
   - rm memcache-8.x-2.x-dev.tar.gz
+  - wget https://www.drupal.org/files/issues/2020-04-30/3002505-8.patch
+  - wget https://www.drupal.org/files/issues/2020-04-30/3002490-3_1.patch
+  - git apply 3002505-8.patch
+  - git apply 3002490-3_1.patch
   - cd $TRAVIS_BUILD_DIR/../drupal-project
   # reorganize sqlsrv directories
   - cp -r $TRAVIS_BUILD_DIR/drivers ./drivers
