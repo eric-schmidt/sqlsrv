@@ -67,6 +67,8 @@ install:
       git apply 3130655-10.patch
       git apply 3131379-2.patch
       # Testing-only patches
+      wget http://beakerboy.com/~kevin/enable_memcache_on_all_Entities.patch
+      git apply enable_memcache_on_all_Entities.patch
       # Fix format of deprecation notices for phpcs 
       wget https://www.drupal.org/files/issues/2020-02-25/3108540-11.patch
       # Add a sqlsrv-specific datatype to test
