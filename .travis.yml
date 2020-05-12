@@ -88,15 +88,17 @@ install:
       fi
     fi
   - mkdir ./modules/contrib
-  # Download and extract memcache module
-  - cd $TRAVIS_BUILD_DIR/../drupal-project/modules/contrib
-  - wget https://ftp.drupal.org/files/projects/memcache-8.x-2.x-dev.tar.gz
-  - tar -xzf memcache-8.x-2.x-dev.tar.gz
-  - rm memcache-8.x-2.x-dev.tar.gz
+  # Download and patch memcache module
+  - cd $TRAVIS_BUILD_DIR/..
+  - git clone https://git.drupalcode.org/project/memcache.git -b 8.x-2.x
+  - cd memcache
   - wget https://www.drupal.org/files/issues/2020-04-30/3002505-8.patch
   - wget https://www.drupal.org/files/issues/2020-04-30/3002490-3_1.patch
   - git apply 3002505-8.patch
   - git apply 3002490-3_1.patch
+  - rm *.patch
+  - cd ..
+  - mv memcache drupal-project/modules/contrib
   - cd $TRAVIS_BUILD_DIR/../drupal-project
   # reorganize sqlsrv directories
   - cp -r $TRAVIS_BUILD_DIR/drivers ./drivers
