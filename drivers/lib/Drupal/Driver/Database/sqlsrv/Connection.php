@@ -428,7 +428,7 @@ class Connection extends DatabaseConnection {
     $driver_options[\PDO::SQLSRV_ATTR_CURSOR_SCROLL_TYPE] = \PDO::SQLSRV_CURSOR_BUFFERED;
 
     // Call our overriden prepare.
-    $stmt = $this->prepare($query, $driver_options);
+    $stmt = $this->connection->prepare($query, $driver_options);
 
     // If statement caching is enabled, store current statement for reuse.
     if ($options['cache_statements'] === TRUE && $options['caching_mode'] != 'disabled' || $options['caching_mode'] == 'always') {
