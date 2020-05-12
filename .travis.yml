@@ -67,7 +67,6 @@ install:
       git apply 3130655-10.patch
       git apply 3131379-2.patch
       # Testing-only patches
-      wget http://beakerboy.com/~kevin/enable_memcache_on_all_Entities.patch
       # Fix format of deprecation notices for phpcs 
       wget https://www.drupal.org/files/issues/2020-02-25/3108540-11.patch
       # Add a sqlsrv-specific datatype to test
@@ -77,7 +76,6 @@ install:
       git apply 2966272-16.patch
       git apply drupal-3111134-database_specific_types-3.patch
       git apply 3108540-11.patch
-      git apply enable_memcache_on_all_Entities.patch
       if [ "${DRUPAL_VERSION}" == "8.8.x" ]; then
         # Override core Condition...pushed to 8.9.x
         wget https://www.drupal.org/files/issues/2020-03-10/3113403-33.patch
@@ -97,6 +95,8 @@ install:
   - git apply 3002505-8.patch
   - git apply 3002490-3_1.patch
   - rm *.patch
+  - rm memcache.services.yml
+  - wget http://beakerboy.com/~kevin/memcache.services.yml
   - cd ..
   - mv memcache drupal-project/modules/contrib
   - cd $TRAVIS_BUILD_DIR/../drupal-project
