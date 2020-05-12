@@ -102,7 +102,7 @@ abstract class TestSuiteBase extends TestSuite {
    * @param string $suite_namespace
    *   SubNamespace used to separate test suite. Examples: Unit, Functional.
    * @param int $index
-   *   The chunk number to test
+   *   The chunk number to test.
    */
   protected function addExtensionTestsBySuiteNamespaceAndChunk($root, $suite_namespace, $index = 0) {
     $failing_classes = [];
